@@ -5,7 +5,8 @@ export const TodoContext = createContext({
   todos: [
     {
       id: 1,
-      todo: "Todo msg",
+      todo: " Todo msg",
+      description: "descripion",
       completed: false,
     },
   ],
@@ -13,6 +14,7 @@ export const TodoContext = createContext({
   updateTodo: (id, todo) => {},
   deleteTodo: (id) => {},
   toggleComplete: (id) => {},
+  createdAt: new Date().toLocaleString(),
 });
 
 export const useTodo = () => {
