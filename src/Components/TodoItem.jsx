@@ -41,6 +41,7 @@ function TodoItem({ todo }) {
             checked={todo.completed}
             onChange={toggleCompleted}
             aria-checked={todo.completed}
+            className=" cursor-pointer"
           />
           <div className="flex flex-col">
             {isTodoEditable ? (
@@ -54,7 +55,7 @@ function TodoItem({ todo }) {
             ) : (
               <Typography
                 variant="h6"
-                className="text-neutral-900 bg-orange-400 w-full px-3 py-1 rounded-sm font-bold"
+                className="text-neutral-900 bg-orange-400 w-full border-b-4 border-r-8 border-green-500 px-3 py-1 rounded-sm font-bold hover:scale-105"
               >
                 {todoMsg}
               </Typography>

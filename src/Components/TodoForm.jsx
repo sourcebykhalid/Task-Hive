@@ -24,7 +24,7 @@ function TodoForm() {
             type="text"
             label="Task Title"
             placeholder="Please enter task title"
-            className="text-neutral-300 py-3 outline-none font-bold text-xl"
+            className="text-neutral-300 py-3 outline-none font-bold text-lg md:text-xl"
             value={todo}
             onChange={(e) => setTodo(e.target.value)}
             required
@@ -36,7 +36,7 @@ function TodoForm() {
           <Textarea
             label="Task Description"
             placeholder="Add a detailed description of the task"
-            className="text-neutral-300 outline-none font-bold"
+            className="text-neutral-300 outline-none font-bold text-sm md:text-lg"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             size="lg"
