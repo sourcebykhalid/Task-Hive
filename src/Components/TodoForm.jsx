@@ -6,19 +6,34 @@ import Reveal from "./Reveal";
 function TodoForm() {
   const [todo, setTodo] = useState("");
   const [description, setDescription] = useState("");
+  const [priority, setPriority] = useState("medium"); // Priority state
   const { addTodo } = useTodo();
 
   const add = (e) => {
     e.preventDefault();
     if (!todo) return;
-    addTodo({ todo, description, completed: false });
+    addTodo({ todo, description, priority, completed: false });
     setTodo("");
     setDescription("");
+    setPriority("P2"); // Reset after adding
   };
 
   return (
-    <Card className="p-6 bg-neutral-900/80 shadow-lg shadow-slate-800 ">
+    <Card className="p-6 bg-neutral-900/80 shadow-lg shadow-slate-800">
       <form onSubmit={add} className="space-y-4">
+        <Reveal>
+          {/* Native Select Dropdown for Priority */}
+          <label className="block text-white font-bold mb-2">Priority</label>
+          <select
+            value={priority}
+            onChange={(e) => setPriority(e.target.value)}
+            className="w-full p-2 text-lg text-neutral-900 bg-white rounded-md shadow-md focus:outline-none"
+          >
+            <option value="P1">P1</option>
+            <option value="P2">P2</option>
+            <option value="P3">P3</option>
+          </select>
+        </Reveal>
         <Reveal>
           <Input
             type="text"
@@ -51,7 +66,7 @@ function TodoForm() {
             size="lg"
             fullWidth
           >
-            Add Note
+            Add Task
           </Button>
         </Reveal>
       </form>

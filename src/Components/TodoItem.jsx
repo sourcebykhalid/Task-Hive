@@ -32,7 +32,9 @@ function TodoItem({ todo }) {
   return (
     <Card
       className={`flex w-full p-6 justify-between items-center rounded-lg shadow-lg transition duration-300 
-        ${todo.completed ? "bg-green-400 line-through" : "bg-neutral-900/40"}`}
+        ${
+          todo.completed ? "bg-emerald-500 line-through" : "bg-neutral-900/40"
+        }`}
     >
       <Reveal>
         <div className="flex items-start gap-4">
@@ -55,7 +57,7 @@ function TodoItem({ todo }) {
             ) : (
               <Typography
                 variant="h6"
-                className="text-neutral-900 bg-orange-400 w-full border-b-4 border-r-8 border-green-500 px-3 py-1 rounded-sm font-bold hover:scale-105"
+                className="text-neutral-900 bg-orange-400 w-full border-b-8 border-r-8 border-emerald-500 px-3 py-1 rounded-sm text-xl font-bold hover:scale-105"
               >
                 {todoMsg}
               </Typography>
@@ -75,19 +77,31 @@ function TodoItem({ todo }) {
             )}
 
             {/* Displaying the creation date */}
-            <Typography
-              variant="caption"
-              className="text-neutral-300 bg-orange-700 p-1 rounded-md font-bold w-fit mt-1"
-            >
-              {todo.createdAt}
-            </Typography>
+            <div className="flex justify-between items-center   w-full mx-auto">
+              <Typography
+                variant="caption"
+                className="text-neutral-300 bg-orange-700 p-1 rounded-md font-bold w-fit mt-1"
+              >
+                {todo.createdAt}
+              </Typography>
+              <Typography
+                variant="caption"
+                className="text-neutral-900 bg-neutral-300 p-1 rounded-md font-bold w-fit mt-1"
+              >
+                {todo.priority}
+              </Typography>
+            </div>
           </div>
         </div>
-        <div className="flex justify-center border-b-2 border-orange-500 rounded-lg w-fit mx-auto p-1 items-center gap-2">
+        <div
+          className={`flex justify-center border-b-2 border-orange-500 rounded-lg w-fit mx-auto p-1 items-center gap-2`}
+        >
           <Button
             color={isTodoEditable ? "yellow" : "green"}
             size="md"
-            className="flex items-center justify-center"
+            className={`${
+              todo.completed ? "bg-neutral-950" : ""
+            } flex items-center justify-center`}
             onClick={() => {
               if (todo.completed) return;
               if (isTodoEditable) {
@@ -102,13 +116,15 @@ function TodoItem({ todo }) {
             {isTodoEditable ? (
               <FaSave className="text-xl text-yellow-500 bg-black" />
             ) : (
-              <FaEdit className="text-xl text-green-500 " />
+              <FaEdit className="text-xl text-emerald-500 " />
             )}
           </Button>
           <Button
             color="red"
             size="md"
-            className="flex items-center justify-center"
+            className={`${
+              todo.completed ? "bg-neutral-950" : ""
+            } flex items-center justify-center`}
             onClick={() => deleteTodo(todo.id)}
             aria-label="Delete Todo"
           >

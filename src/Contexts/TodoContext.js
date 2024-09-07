@@ -15,6 +15,7 @@ export const TodoContext = createContext({
   deleteTodo: (id) => {},
   toggleComplete: (id) => {},
   createdAt: new Date().toLocaleString(),
+  setPriorityLevel: (id, level) => {},
 });
 
 export const useTodo = () => {
