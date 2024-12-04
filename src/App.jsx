@@ -13,8 +13,8 @@ const App = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentTask, setCurrentTask] = useState(null);
   const [sortConfig, setSortConfig] = useState({
-    column: "summary", // Set a default column
-    direction: "asc",
+    column: null,
+    direction: null,
   });
 
   // Load tasks from localStorage
@@ -110,30 +110,22 @@ const App = () => {
     return 0;
   });
 
-  const handleSort = (column) => {
-    setSortConfig((prevSortConfig) => {
-      if (prevSortConfig.column === column) {
-        // Toggle direction if the same column is clicked
-        return {
-          column,
-          direction: prevSortConfig.direction === "asc" ? "desc" : "asc",
-        };
-      }
-      // Default to ascending for a new column
-      return { column, direction: "asc" };
-    });
+  const handleSort = (sortType) => {
+    let sortedTasks = [...tasks];
 
-    // Sort tasks based on the updated configuration
-    const sortedTasks = [...tasks].sort((a, b) => {
-      const valueA = a[column];
-      const valueB = b[column];
-
-      if (valueA < valueB) return sortConfig.direction === "asc" ? -1 : 1;
-      if (valueA > valueB) return sortConfig.direction === "asc" ? 1 : -1;
-      return 0;
-    });
+    if (sortType === "asc") {
+      sortedTasks.sort((a, b) => (a.summary > b.summary ? 1 : -1));
+    } else if (sortType === "desc") {
+      sortedTasks.sort((a, b) => (a.summary < b.summary ? 1 : -1));
+    } else if (sortType === "priority") {
+      sortedTasks.sort((a, b) => {
+        const priorities = { High: 3, Medium: 2, Low: 1 };
+        return priorities[b.priority] - priorities[a.priority];
+      });
+    }
 
     setTasks(sortedTasks);
+    setSortConfig({ column: "summary", direction: sortType });
   };
 
   return (
@@ -143,7 +135,11 @@ const App = () => {
       }`}
     >
       <Header onSearch={setSearchQuery} onGroupBy={setGroupBy} />
-      <Tabs activeTab={activeTab} setActiveTab={setActiveTab} />
+      <Tabs
+        activeTab={activeTab}
+        setActiveTab={setActiveTab}
+        onSort={handleSort}
+      />
 
       <div className=" p-0 md:p-4">
         {groupBy === "none" ? (
@@ -153,6 +149,7 @@ const App = () => {
               setCurrentTask(task);
               setIsModalOpen(true);
             }}
+            sortConfig={sortConfig}
             onDelete={handleDeleteTask}
             onToggleStatus={handleToggleStatus}
           />

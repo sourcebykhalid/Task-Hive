@@ -38,7 +38,7 @@ const TaskList = ({
   return (
     <Reveal>
       <div className="overflow-x-auto">
-        <table className="table-auto w-full border-collapse border border-gray-300 shadow-lg rounded-lg bg-white">
+        <table className=" w-full border-collapse border border-gray-300 shadow-lg rounded-lg bg-white">
           <thead>
             <tr className="bg-gradient-to-r from-cyan-300 to-blue-500 text-white">
               <th
