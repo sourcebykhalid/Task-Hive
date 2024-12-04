@@ -42,14 +42,14 @@ const TaskList = ({
           <thead>
             <tr className="bg-gradient-to-r from-cyan-300 to-blue-500 text-white">
               <th
-                className="py-3 px-6 cursor-pointer border border-gray-300 text-left "
+                className="py-3 px-3 md:px-6 cursor-pointer border border-gray-300 text-left"
                 onClick={() => onSort("summary")}
               >
                 Summary{" "}
                 {column === "summary" ? (direction === "asc" ? "↑" : "↓") : ""}
               </th>
               <th
-                className="py-3 px-6 cursor-pointer border border-gray-300 text-left"
+                className="py-3 px-3 md:px-6 cursor-pointer border border-gray-300 text-left"
                 onClick={() => onSort("createdOn")}
               >
                 D.O.C{" "}
@@ -60,13 +60,20 @@ const TaskList = ({
                   : ""}
               </th>
               <th
-                className="py-3 px-6 cursor-pointer border border-gray-300 text-left"
+                className="py-3 px-3 md:px-6 cursor-pointer border border-gray-300 text-left"
+                onClick={() => onSort("dueDate")}
+              >
+                Due Date{" "}
+                {column === "dueDate" ? (direction === "asc" ? "↑" : "↓") : ""}
+              </th>
+              <th
+                className="py-3 px-3 md:px-6 cursor-pointer border border-gray-300 text-left"
                 onClick={() => onSort("priority")}
               >
                 Priority{" "}
                 {column === "priority" ? (direction === "asc" ? "↑" : "↓") : ""}
               </th>
-              <th className="py-3 px-6 border border-gray-300 text-center">
+              <th className="py-3 px-3 md:px-6 border border-gray-300 text-center">
                 Actions
               </th>
             </tr>
@@ -82,18 +89,25 @@ const TaskList = ({
                     : "bg-yellow-100 hover:bg-yellow-200"
                 }`}
               >
-                <td className="py-3 px-6 border border-gray-300">
-                  <span className=" text-gray-700 font-semibold">
+                <td className="py-3 px-3 md:px-6 border border-gray-300">
+                  <span className="text-gray-700 font-semibold">
                     {task.summary}
                   </span>
                 </td>
-                <td className="py-3 px-6 border border-gray-300 text-sm">
+                <td className="py-3 px-3 md:px-6 border border-gray-300 text-sm">
                   {new Date(task.createdOn).toLocaleString("en-US", {
                     dateStyle: "medium",
                     timeStyle: "short",
                   })}
                 </td>
-                <td className="py-3 px-6 border border-gray-300">
+                <td className="py-3 px-3 md:px-6 border border-gray-300 text-sm">
+                  {task.dueDate
+                    ? new Date(task.dueDate).toLocaleString("en-US", {
+                        dateStyle: "medium",
+                      })
+                    : "N/A"}
+                </td>
+                <td className="py-3 px-3 md:px-6 border border-gray-300">
                   <span
                     className={`px-3 py-1 rounded-full text-sm ${
                       task.priority === "High"
@@ -106,7 +120,7 @@ const TaskList = ({
                     {task.priority}
                   </span>
                 </td>
-                <td className="py-5 px-6 border border-gray-300 flex justify-center space-x-4">
+                <td className="py-5 px-3 md:px-6 border border-gray-300 flex justify-center space-x-4">
                   <Tooltip content="Edit Task" placement="top">
                     <button
                       className="text-blue-500 hover:text-blue-700"
