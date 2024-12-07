@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useMemo } from "react";
-import Header from "./components/Header";
-import Tabs from "./components/Tabs";
-import TaskList from "./components/TaskList";
-import AddTaskButton from "./components/AddTaskButton";
-import TaskModal from "./components/TaskModal";
-import HeroSection from "./components/Hero";
-import { About } from "./components/About";
+import Header from "./Components/Header";
+import Tabs from "./Components/Tabs";
+import TaskList from "./Components/TaskList";
+import AddTaskButton from "./Components/AddTaskButton";
+import TaskModal from "./Components/TaskModal";
+import HeroSection from "./Components/Hero";
+import { About } from "./Components/About";
 
 const App = () => {
   const [tasks, setTasks] = useState([]);
