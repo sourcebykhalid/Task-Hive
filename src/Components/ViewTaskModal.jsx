@@ -11,35 +11,29 @@ const ViewTaskModal = ({ isOpen, onClose, task }) => {
   if (!task) return null;
 
   return (
-    <Dialog
-      className=" w-full h-full  md:w-2/3"
-      open={isOpen}
-      handler={onClose}
-    >
-      <DialogHeader className=" border-b-2 border-indigo-700">
+    <Dialog className="w-full h-full md:w-2/3" open={isOpen} handler={onClose}>
+      <DialogHeader className="border-b-2 border-indigo-700">
         {task.summary}
       </DialogHeader>
-      <DialogBody>
+      <DialogBody className="overflow-y-scroll max-h-[500px] px-4">
         <p>
-          <strong className=" font-bold text-blue-gray-900">
-            Description:
-          </strong>{" "}
+          <strong className="font-bold text-blue-gray-900">Description:</strong>{" "}
           {task.description}
         </p>
         <p>
-          <strong className=" font-bold text-blue-gray-900">Priority:</strong>{" "}
+          <strong className="font-bold text-blue-gray-900">Priority:</strong>{" "}
           {task.priority}
         </p>
         <p>
-          <strong className=" font-bold text-blue-gray-900">Created On:</strong>{" "}
+          <strong className="font-bold text-blue-gray-900">Created On:</strong>{" "}
           {new Date(task.createdOn).toLocaleDateString()}
         </p>
         <p>
-          <strong className=" font-bold text-blue-gray-900">Due Date:</strong>{" "}
+          <strong className="font-bold text-blue-gray-900">Due Date:</strong>{" "}
           {new Date(task.dueDate).toLocaleDateString()}
         </p>
         <p>
-          <strong className=" font-bold text-blue-gray-900">Status:</strong>{" "}
+          <strong className="font-bold text-blue-gray-900">Status:</strong>{" "}
           {task.completed ? "Completed" : "Pending"}
         </p>
       </DialogBody>

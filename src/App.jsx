@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from "react";
-import Header from "./Components/HeroHeading";
-import Tabs from "./Components/Tabs";
-import TaskList from "./Components/TaskList";
-import AddTaskButton from "./Components/AddTaskButton";
-import TaskModal from "./Components/TaskModal";
+import React, { useState, useEffect, useMemo } from "react";
+import Header from "./components/Header";
+import Tabs from "./components/Tabs";
+import TaskList from "./components/TaskList";
+import AddTaskButton from "./components/AddTaskButton";
+import TaskModal from "./components/TaskModal";
+import HeroSection from "./components/Hero";
+import { About } from "./components/About";
 
 const App = () => {
   const [tasks, setTasks] = useState([]);
@@ -37,28 +39,42 @@ const App = () => {
     return true;
   });
 
-  // Handle search
+  // Handle search Function......
   const searchedTasks = filteredTasks.filter((task) =>
     task.summary.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
-  // Group tasks dynamically
+  // Group tasks dynamically........
   const groupTasks = (tasks, groupBy) => {
     if (groupBy === "none") return tasks;
 
-    const grouped = tasks.reduce((acc, task) => {
-      const key = task[groupBy] || "Other";
+    return tasks.reduce((acc, task) => {
+      let key;
+
+      // Grouping by 'createdOn'
+      if (groupBy === "createdOn") {
+        key = task.createdOn
+          ? new Date(task.createdOn).toLocaleDateString("en-CA") // Format: YYYY-MM-DD
+          : "No Date";
+      }
+      // Grouping by 'completed' status
+      else if (groupBy === "completed") {
+        key = task.completed ? "Completed" : "Pending";
+      }
+      // Grouping by any other property
+      else {
+        key = task[groupBy] || "No Value";
+      }
+
       acc[key] = acc[key] || [];
       acc[key].push(task);
       return acc;
     }, {});
-
-    return Object.entries(grouped); // Convert object to array for rendering
   };
 
-  const groupedTasks = groupTasks(searchedTasks, groupBy);
+  const groupedTasks = Object.entries(groupTasks(searchedTasks, groupBy));
 
-  // Handle Add/Edit Task
+  // Handle Add/Edit Task.......
   const handleSaveTask = (task) => {
     if (!task.summary || task.summary.trim() === "") {
       // Prevent adding a task without a title
@@ -86,12 +102,12 @@ const App = () => {
     setCurrentTask(null);
   };
 
-  // Handle Delete Task
+  // Handle Delete Task.....
   const handleDeleteTask = (task) => {
     setTasks((prevTasks) => prevTasks.filter((t) => t.id !== task.id));
   };
 
-  // Handle Toggle Task Status
+  // Handle Toggle Task Status.......
   const handleToggleStatus = (task) => {
     setTasks((prevTasks) =>
       prevTasks.map((t) =>
@@ -99,32 +115,22 @@ const App = () => {
       )
     );
   };
-  const sortedTasks = [...searchedTasks].sort((a, b) => {
-    if (!sortConfig.column) return 0; // No sorting by default
-
-    const aValue = a[sortConfig.column];
-    const bValue = b[sortConfig.column];
-
-    if (aValue < bValue) return sortConfig.direction === "asc" ? -1 : 1;
-    if (aValue > bValue) return sortConfig.direction === "asc" ? 1 : -1;
-    return 0;
-  });
+  const sortedTasks = useMemo(() => {
+    let tasksToSort = [...searchedTasks];
+    if (sortConfig.direction === "asc") {
+      tasksToSort.sort((a, b) => (a.summary > b.summary ? 1 : -1));
+    } else if (sortConfig.direction === "desc") {
+      tasksToSort.sort((a, b) => (a.summary < b.summary ? 1 : -1));
+    } else if (sortConfig.direction === "priority") {
+      const priorities = { High: 3, Medium: 2, Low: 1 };
+      tasksToSort.sort(
+        (a, b) => priorities[b.priority] - priorities[a.priority]
+      );
+    }
+    return tasksToSort;
+  }, [searchedTasks, sortConfig]);
 
   const handleSort = (sortType) => {
-    let sortedTasks = [...tasks];
-
-    if (sortType === "asc") {
-      sortedTasks.sort((a, b) => (a.summary > b.summary ? 1 : -1));
-    } else if (sortType === "desc") {
-      sortedTasks.sort((a, b) => (a.summary < b.summary ? 1 : -1));
-    } else if (sortType === "priority") {
-      sortedTasks.sort((a, b) => {
-        const priorities = { High: 3, Medium: 2, Low: 1 };
-        return priorities[b.priority] - priorities[a.priority];
-      });
-    }
-
-    setTasks(sortedTasks);
     setSortConfig({ column: "summary", direction: sortType });
   };
 
@@ -141,37 +147,40 @@ const App = () => {
         onSort={handleSort}
       />
 
-      <div className=" p-0 md:p-4">
-        {groupBy === "none" ? (
-          <TaskList
-            tasks={searchedTasks}
-            onEdit={(task) => {
-              setCurrentTask(task);
-              setIsModalOpen(true);
-            }}
-            sortConfig={sortConfig}
-            onDelete={handleDeleteTask}
-            onToggleStatus={handleToggleStatus}
-          />
-        ) : (
-          groupedTasks.map(([group, tasks]) => (
-            <div key={group} className="mb-6">
-              <h3 className="text-xl font-semibold mb-2">{group}</h3>
-              <TaskList
-                tasks={tasks}
-                onEdit={(task) => {
-                  setCurrentTask(task);
-                  setIsModalOpen(true);
-                }}
-                onDelete={handleDeleteTask}
-                onToggleStatus={handleToggleStatus}
-                onSort={handleSort}
-                sortConfig={sortConfig}
-              />
-            </div>
-          ))
-        )}
+      <div className="p-0 md:p-4 flex flex-col md:flex-row justify-center items-start gap-x-2 ">
+        <div className=" w-screen md:w-2/3">
+          {groupBy === "none" ? (
+            <TaskList
+              tasks={sortedTasks} // Use the sortedTasks here
+              onEdit={(task) => {
+                setCurrentTask(task);
+                setIsModalOpen(true);
+              }}
+              sortConfig={sortConfig}
+              onDelete={handleDeleteTask}
+              onToggleStatus={handleToggleStatus}
+            />
+          ) : (
+            groupedTasks.map(([group, tasks]) => (
+              <div key={group} className="mb-6">
+                <h3 className="text-xl font-semibold mb-2">{group}</h3>
+                <TaskList
+                  tasks={tasks}
+                  onEdit={(task) => {
+                    setCurrentTask(task);
+                    setIsModalOpen(true);
+                  }}
+                  onDelete={handleDeleteTask}
+                  onToggleStatus={handleToggleStatus}
+                  sortConfig={sortConfig}
+                />
+              </div>
+            ))
+          )}
+        </div>
+        <HeroSection className=" md:w-1/3 " />
       </div>
+      <About />
 
       <AddTaskButton onClick={() => setIsModalOpen(true)} />
 
