@@ -12,7 +12,7 @@ const Tabs = ({ activeTab, setActiveTab, onSort }) => {
 
   return (
     <div className="flex flex-col md:flex-row justify-between items-center gap-y-2 mt-1">
-      <div className="flex border-b-2 border-neutral-400 cursor-pointer w-full md:w-3/4">
+      <div className="flex border-b-2 border-blue-gray-400 cursor-pointer w-full md:w-3/4">
         {tabs.map((tab) => (
           <button
             key={tab}

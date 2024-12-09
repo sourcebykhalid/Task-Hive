@@ -27,7 +27,7 @@ const HeroSection = () => {
 
         {/* About the Task Hive App */}
         <div className="text-center w-full mx-auto">
-          <h2 className="text-2xl font-bold text-gray-800 mb-2 border-b-4 rounded-md border-blue-gray-400 w-fit mx-auto px-2">
+          <h2 className="text-2xl font-bold text-gray-800 mb-2 border-b-4 rounded-md border-blue-gray-900 w-fit mx-auto px-2">
             About Task Hive
           </h2>
           <p className="text-blue-gray-900">

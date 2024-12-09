@@ -18,7 +18,7 @@ export function About() {
           <AccordionHeader onClick={() => handleOpen(1)}>
             What is Task Hive App?
           </AccordionHeader>
-          <AccordionBody className="bg-gradient-to-r from-yellow-100 to-gray-700 text-gray-900 p-8 border-b-4 rounded-sm border-black">
+          <AccordionBody className="bg-gradient-to-r from-yellow-100 to-gray-700 text-gray-900 p-8 border-b-4 rounded-sm border-blue-gray-900">
             This Task Hive App is a simple and intuitive tool designed to help
             you organize your tasks efficiently. Whether it&apos;s personal
             goals, work projects, or daily errands, you can track everything in
@@ -29,7 +29,7 @@ export function About() {
           <AccordionHeader onClick={() => handleOpen(2)}>
             How to use the Task Hive App?
           </AccordionHeader>
-          <AccordionBody className="bg-gradient-to-r from-yellow-100 to-gray-700 text-gray-900 p-8 border-b-4 rounded-sm border-black">
+          <AccordionBody className="bg-gradient-to-r from-yellow-100 to-gray-700 text-gray-900 p-8 border-b-4 rounded-sm border-blue-gray-900">
             Using the Task Hive App is easy. Add new tasks, edit existing ones,
             mark tasks as complete, and delete tasks you no longer need.
             Organize your day with just a few clicks and stay on top of your
@@ -40,7 +40,7 @@ export function About() {
           <AccordionHeader onClick={() => handleOpen(3)}>
             What features does this Task Hive App offer?
           </AccordionHeader>
-          <AccordionBody className="bg-gradient-to-r from-yellow-100 to-gray-700 text-gray-900 p-8 border-b-4 rounded-sm border-black">
+          <AccordionBody className="bg-gradient-to-r from-yellow-100 to-gray-700 text-gray-900 p-8 border-b-4 rounded-sm border-blue-gray-900">
             This app includes features like task creation, editing, deleting,
             and marking tasks as complete. Additionally, you can filter tasks by
             their status (e.g., completed or pending) to focus on what matters
