@@ -5,7 +5,7 @@ import Reveal from "./Reveal";
 const HeroSection = () => {
   return (
     <Reveal>
-      <div className="flex flex-col items-center justify-center  bg-gradient-to-r from-yellow-100 to-black rounded-lg p-8  text-gray-100  shadow-lg shadow-blue-gray-500">
+      <div className="flex flex-col items-center justify-center  bg-gradient-to-r from-yellow-100 to-gray-800 rounded-lg p-8  text-gray-100  shadow-lg shadow-blue-gray-500">
         <div className="flex flex-wrap justify-center gap-10 mb-6">
           <div className="flex flex-col items-center">
             <Clipboard className="w-32 h-32 text-blue-600" />
@@ -26,11 +26,11 @@ const HeroSection = () => {
         </div>
 
         {/* About the Task Hive App */}
-        <div className="text-center">
-          <h2 className="text-2xl font-bold text-gray-800 mb-2">
+        <div className="text-center w-full mx-auto">
+          <h2 className="text-2xl font-bold text-gray-800 mb-2 border-b-4 rounded-md border-blue-gray-400 w-fit mx-auto px-2">
             About Task Hive
           </h2>
-          <p className="text-teal-800">
+          <p className="text-blue-gray-900">
             Task Hive helps you manage your tasks efficiently and in style. Stay
             organized, prioritize your work, and keep track of your progress all
             in one place.

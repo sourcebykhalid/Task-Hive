@@ -17,13 +17,13 @@ const Header = ({ onSearch, onGroupBy }) => {
       <div className="relative flex items-center gap-x-4 px-8 py-5 bg-blue-gray-200 shadow-lg rounded-lg border border-gray-200 group hover:shadow-2xl transition-all duration-300">
         {/* Icon Container */}
 
-        <div className="p-4 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-full shadow-md group-hover:scale-110 transition-transform duration-300">
+        <div className="p-4 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-full shadow-md group-hover:scale-110 transition-transform duration-300 border-r-4 border-blue-gray-900">
           <Clipboard className="text-white text-5xl" /> {/*  Clipboard icon */}
         </div>
 
         {/* Text Content */}
         <div>
-          <h1 className="text-3xl font-bold text-gray-800 group-hover:text-blue-600 transition-colors duration-300">
+          <h1 className="text-3xl font-bold text-gray-800 group-hover:text-blue-600 transition-colors duration-300 border-b-4 rounded-md px-1 border-blue-gray-900 w-fit">
             Task Hive
           </h1>
           <p className="text-sm text-gray-900">

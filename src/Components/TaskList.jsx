@@ -58,7 +58,7 @@ const TaskList = ({
               key={task.id}
               className={`transition-all duration-300 ${
                 task.completed
-                  ? "bg-green-100 hover:bg-green-200"
+                  ? "bg-green-200 hover:bg-green-200"
                   : "bg-yellow-100 hover:bg-yellow-200"
               }`}
             >
