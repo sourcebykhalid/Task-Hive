@@ -11,7 +11,7 @@ const ViewTaskModal = ({ isOpen, onClose, task }) => {
   if (!task) return null;
 
   return (
-    <Dialog className="w-full h-full md:w-2/3" open={isOpen} handler={onClose}>
+    <Dialog className="w-full h-fit md:w-2/3" open={isOpen} handler={onClose}>
       <DialogHeader className="border-b-2 border-indigo-700">
         {task.summary}
       </DialogHeader>
