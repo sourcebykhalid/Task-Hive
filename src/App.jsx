@@ -122,7 +122,7 @@ const App = () => {
     } else if (sortConfig.direction === "desc") {
       tasksToSort.sort((a, b) => (a.summary < b.summary ? 1 : -1));
     } else if (sortConfig.direction === "priority") {
-      const priorities = { High: 3, Medium: 2, Low: 1 };
+      const priorities = { High: 3, Medium: 2, Low: 1, None: 0 };
       tasksToSort.sort(
         (a, b) => priorities[b.priority] - priorities[a.priority]
       );
