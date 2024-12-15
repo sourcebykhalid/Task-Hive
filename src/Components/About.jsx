@@ -29,7 +29,7 @@ export function About() {
           <AccordionHeader onClick={() => handleOpen(2)}>
             How to use the Task Hive App?
           </AccordionHeader>
-          <AccordionBody className="bg-gradient-to-r from-yellow-100 to-gray-700 text-gray-900 p-8 border-b-4 rounded-sm border-blue-gr ay-900">
+          <AccordionBody className="bg-gradient-to-r from-yellow-100 to-gray-700 text-gray-900 p-8 border-b-4 rounded-sm border -gr ay-900">
             Using the Task Hive App is easy. Add new tasks, edit existing ones,
             mark tasks as complete, and delete tasks you no longer need.
             Organize your day with just a few clicks and stay on top of your
